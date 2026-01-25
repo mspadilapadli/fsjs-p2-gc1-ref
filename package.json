@@ -1,21 +1,24 @@
 {
-  "name": "fsjs-p2-gc1-ref",
-  "version": "1.0.0",
-  "description": "init commmit submodule p2w1",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^5.2.1",
-    "pg": "^8.17.2",
-    "sequelize": "^6.37.7"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.11",
-    "sequelize-cli": "^6.6.5"
-  }
+    "name": "fsjs-p2-gc1-ref",
+    "version": "1.0.0",
+    "description": "init commmit submodule p2w1",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "npx nodemon app.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "^6.0.0",
+        "express": "^5.2.1",
+        "jsonwebtoken": "^9.0.3",
+        "pg": "^8.17.2",
+        "sequelize": "^6.37.7"
+    },
+    "devDependencies": {
+        "nodemon": "^3.1.11",
+        "sequelize-cli": "^6.6.5"
+    }
 }
