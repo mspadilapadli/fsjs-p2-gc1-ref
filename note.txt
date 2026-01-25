@@ -1,0 +1,11 @@
+npx sequelize model:create --name User --attributes username:string,email:string,password:string,role:string,phoneNumber:string,address:string
+
+npx sequelize model:create --name Type --attributes name:string 
+
+npx sequelize model:create --name Lodging --attributes name:string,facility:string,roomCapacity:integer,imgUrl:string,location:string,price:integer,typeId:integer,authorId:integer
+
+
+npx sequelize seed:create --name users-seed
+npx sequelize seed:create --name types-seed
+npx sequelize seed:create --name lodgings-seed
+
