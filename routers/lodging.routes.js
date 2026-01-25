@@ -1,6 +1,6 @@
+const LodgingController = require("../controllers/LodgingController copy");
+
 const router = require("express").Router();
 
-router.get("/", (req, res) => {
-    res.send("Lodging routes");
-});
+router.get("/", LodgingController.getLodgings);
 module.exports = router;
