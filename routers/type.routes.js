@@ -1,7 +1,7 @@
+const TypeController = require("../controllers/typeController");
+
 const router = require("express").Router();
 
-router.get("/", (req, res) => {
-    res.send("Type routes");
-});
+router.get("/", TypeController.getTypes);
 
 module.exports = router;
