@@ -30,6 +30,22 @@ class LodgingController {
             next(error);
         }
     }
+
+    static async getAllRoomsUser(req, res, next) {
+        try {
+            const rooms = await Lodging.findAll({
+                include: {
+                    model: User,
+                    attributes: {
+                        exclude: ["password"],
+                    },
+                },
+            });
+            res.status(200).json(rooms);
+        } catch (error) {
+            next(error);
+        }
+    }
     static async getLodgings(req, res, next) {
         try {
             const rooms = await Lodging.findAll();
