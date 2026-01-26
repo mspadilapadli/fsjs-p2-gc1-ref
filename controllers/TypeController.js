@@ -39,5 +39,22 @@ class TypeController {
             next(error);
         }
     }
+
+    static async deleteType(req, res, next) {
+        try {
+            const { id } = req.params;
+            const type = await Type.findByPk(id);
+            if (!type) throw { name: "NotFound" };
+            await Type.destroy({
+                where: { id },
+            });
+
+            res.status(200).json({
+                message: `${type.name} success to delete `,
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 module.exports = TypeController;
