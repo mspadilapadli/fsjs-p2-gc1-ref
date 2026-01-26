@@ -21,6 +21,24 @@ class LodgingController {
             next(error);
         }
     }
+    static async putRoom(req, res, next) {
+        try {
+            const { id } = req.params;
+            const room = await Lodging.findByPk(id);
+            if (!room) throw { name: "NotFound" };
+            await Lodging.update(req.body, {
+                where: { id },
+            });
+            let updated = await Lodging.findByPk(id);
+
+            res.status(200).json({
+                message: `Data with id ${room.id} has been updated`,
+                updated,
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 module.exports = LodgingController;
