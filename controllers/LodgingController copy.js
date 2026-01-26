@@ -1,5 +1,35 @@
 const { Lodging } = require("../models");
 class LodgingController {
+    static async postRoom(req, res, next) {
+        try {
+            let {
+                name,
+                facility,
+                roomCapacity,
+                imgUrl,
+                location,
+                price,
+                typeId,
+            } = req.body;
+            const rooms = await Lodging.create({
+                name,
+                facility,
+                roomCapacity,
+                imgUrl,
+                location,
+                price,
+                typeId,
+                authorId: req.user.id,
+            });
+            res.status(201).json({
+                message: `new item ${rooms.name} created `,
+                rooms,
+            });
+        } catch (error) {
+            console.log(error);
+            next(error);
+        }
+    }
     static async getLodgings(req, res, next) {
         try {
             const rooms = await Lodging.findAll();
