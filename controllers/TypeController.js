@@ -20,5 +20,24 @@ class TypeController {
             res.status(500).json({ message: "Internal Server Error" });
         }
     }
+
+    static async putType(req, res, next) {
+        try {
+            const { id } = req.params;
+            const type = await Type.findByPk(id);
+            if (!type) throw { name: "NotFound" };
+            await Type.update(req.body, {
+                where: { id },
+            });
+            let updated = await Type.findByPk(id);
+
+            res.status(200).json({
+                message: `${type.name} has been updated `,
+                updated,
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 module.exports = TypeController;
