@@ -52,7 +52,10 @@ module.exports = (sequelize, DataTypes) => {
                     },
                 },
             },
-            role: DataTypes.STRING,
+            role: {
+                type: DataTypes.STRING,
+                defaultValue: `Staff`,
+            },
             phoneNumber: DataTypes.STRING,
             address: DataTypes.STRING,
         },
