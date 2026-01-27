@@ -16,7 +16,23 @@ module.exports = (sequelize, DataTypes) => {
         {
             username: DataTypes.STRING,
             email: DataTypes.STRING,
-            password: DataTypes.STRING,
+            password: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                validate: {
+                    notEmpty: {
+                        msg: `password is required`,
+                    },
+                    notNull: {
+                        msg: `password is required`,
+                    },
+                    minLength(value) {
+                        if (value.length < 5) {
+                            throw new Error(`Minimum password character is 5`);
+                        }
+                    },
+                },
+            },
             role: DataTypes.STRING,
             phoneNumber: DataTypes.STRING,
             address: DataTypes.STRING,
