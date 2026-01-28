@@ -45,6 +45,11 @@ class LodgingController {
                 };
             }
 
+            // * Filtering
+            if (filter) {
+                option.where.typeId = filter;
+            }
+
             // * meta data
             const { count, rows } = await Lodging.findAndCountAll(option);
             res.status(200).json({
