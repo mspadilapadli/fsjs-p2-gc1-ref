@@ -50,6 +50,13 @@ class LodgingController {
                 option.where.typeId = filter;
             }
 
+            //* sorting
+            if (sort) {
+                const ordering = sort[0] === "-" ? `DESC` : `ASC`;
+                const orderByColom = ordering === `DESC` ? sort.slice(1) : sort;
+                option.order = [[orderByColom, ordering]];
+            }
+
             // * meta data
             const { count, rows } = await Lodging.findAndCountAll(option);
             res.status(200).json({
