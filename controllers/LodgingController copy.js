@@ -31,6 +31,35 @@ class LodgingController {
         }
     }
 
+    static async getAllRooms(req, res) {
+        try {
+            const { search, filter, sort, page } = req.query;
+
+            let option = {};
+            option.where = {};
+
+            // * search
+            if (search) {
+                option.where.name = {
+                    [Op.iLike]: `%${search}%`,
+                };
+            }
+
+            // * meta data
+            const { count, rows } = await Lodging.findAndCountAll(option);
+            res.status(200).json({
+                page: pageNumber,
+                data: rows,
+                totalData: count,
+                totalPage: Math.ceil(count / limit),
+                dataPerPage: limit,
+            });
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ message: `Internal Server Error` });
+        }
+    }
+
     static async getAllRoomsUser(req, res, next) {
         try {
             const rooms = await Lodging.findAll({
