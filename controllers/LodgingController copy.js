@@ -57,6 +57,22 @@ class LodgingController {
                 option.order = [[orderByColom, ordering]];
             }
 
+            // *pagination
+            let limit = 10;
+            let pageNumber = 1;
+            if (page) {
+                if (page.size) {
+                    limit = page.size;
+                    option.limit = limit;
+                } else {
+                    option.limit = limit;
+                }
+                if (page.number) {
+                    pageNumber = page.number;
+                    option.offset = limit * (pageNumber - 1);
+                }
+            }
+
             // * meta data
             const { count, rows } = await Lodging.findAndCountAll(option);
             res.status(200).json({
