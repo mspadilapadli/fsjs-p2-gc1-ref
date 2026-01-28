@@ -39,14 +39,6 @@ function errorHandler(error, req, res, next) {
     res.status(status).json({
         message,
     });
-    // if (err.name === "SequelizeValidationError") {
-    //     res.status(400).json({
-    //         message: err.errors.map((e) => e.message),
-    //     });
-    // } else {
-    //     console.log(error.name);
-    //     res.status(500).json({ message: `Internal Server Error` });
-    // }
 }
 
 module.exports = errorHandler;
