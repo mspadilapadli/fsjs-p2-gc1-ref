@@ -1,4 +1,13 @@
-const { hashSync, compareSync } = require("bcryptjs");
+//* async
+const { hash, compare } = require("bcryptjs");
+
+module.exports = {
+    hashPassword: (password) => hash(password),
+    comparePassword: (passwordInput, passwordDB) =>
+        compare(passwordInput, passwordDB),
+};
+
+//*sync
 // const bcrypt = require("bcryptjs");
 
 // let hashPassword = (password) => {
@@ -10,8 +19,3 @@ const { hashSync, compareSync } = require("bcryptjs");
 // };
 
 // module.exports = { hashPassword, comparePassword };
-module.exports = {
-    hashPassword: (password) => hashSync(password),
-    comparePassword: (passwordInput, passwordDB) =>
-        compareSync(passwordInput, passwordDB),
-};
