@@ -67,8 +67,39 @@ module.exports = (sequelize, DataTypes) => {
                     },
                 },
             },
-            location: DataTypes.STRING,
-            price: DataTypes.INTEGER,
+            location: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                validate: {
+                    notEmpty: {
+                        msg: `location is required`,
+                    },
+                    notNull: {
+                        msg: `location is required`,
+                    },
+                },
+            },
+            price: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                validate: {
+                    notEmpty: {
+                        msg: `price is required`,
+                    },
+                    notNull: {
+                        msg: `price is required`,
+                    },
+                    min: {
+                        args: 1500000,
+                        msg: `Minimum price is 1500000`,
+                    },
+                    // min(value) {
+                    //     if (value <= 1500000) {
+                    //         throw new Error(`minimum price is 1500000`);
+                    //     }
+                    // },
+                },
+            },
             typeId: DataTypes.INTEGER,
             authorId: DataTypes.INTEGER,
         },
