@@ -15,8 +15,30 @@ module.exports = (sequelize, DataTypes) => {
     }
     Lodging.init(
         {
-            name: DataTypes.STRING,
-            facility: DataTypes.STRING,
+            name: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                validate: {
+                    notEmpty: {
+                        msg: `name is required`,
+                    },
+                    notNull: {
+                        msg: `name is required`,
+                    },
+                },
+            },
+            facility: {
+                type: DataTypes.TEXT,
+                allowNull: false,
+                validate: {
+                    notEmpty: {
+                        msg: `facility is required`,
+                    },
+                    notNull: {
+                        msg: `facility is required`,
+                    },
+                },
+            },
             roomCapacity: DataTypes.INTEGER,
             imgUrl: DataTypes.STRING,
             location: DataTypes.STRING,
