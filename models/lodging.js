@@ -100,8 +100,30 @@ module.exports = (sequelize, DataTypes) => {
                     // },
                 },
             },
-            typeId: DataTypes.INTEGER,
-            authorId: DataTypes.INTEGER,
+            typeId: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                validate: {
+                    notEmpty: {
+                        msg: `typeId is required`,
+                    },
+                    notNull: {
+                        msg: `typeId is required`,
+                    },
+                },
+            },
+            authorId: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                validate: {
+                    notEmpty: {
+                        msg: `authorId is required`,
+                    },
+                    notNull: {
+                        msg: `authorId is required`,
+                    },
+                },
+            },
         },
         {
             sequelize,
