@@ -39,8 +39,34 @@ module.exports = (sequelize, DataTypes) => {
                     },
                 },
             },
-            roomCapacity: DataTypes.INTEGER,
-            imgUrl: DataTypes.STRING,
+            roomCapacity: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                validate: {
+                    notEmpty: {
+                        msg: `room capacity is required`,
+                    },
+                    notNull: {
+                        msg: `room capacity is required`,
+                    },
+                },
+            },
+            imgUrl: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                validate: {
+                    notEmpty: {
+                        msg: `imgUrl is required`,
+                    },
+                    notNull: {
+                        msg: `imgUrl is required`,
+                    },
+                    isUrl: {
+                        args: true,
+                        msg: `Please input url format`,
+                    },
+                },
+            },
             location: DataTypes.STRING,
             price: DataTypes.INTEGER,
             typeId: DataTypes.INTEGER,
