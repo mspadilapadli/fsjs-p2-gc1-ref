@@ -146,6 +146,8 @@ class LodgingController {
         try {
             const base64String = req.file.buffer.toString("base64");
 
+            const dataUrl = `data:${req.file.mimetype};base64,${base64String}`;
+
             const { id } = req.params;
             const room = await Lodging.findByPk(id);
             if (!room) throw { name: "NotFound" };
