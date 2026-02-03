@@ -148,6 +148,11 @@ class LodgingController {
 
             const dataUrl = `data:${req.file.mimetype};base64,${base64String}`;
 
+            const result = await cloudinary.uploader.upload(dataUrl, {
+                public_id: req.file.originalname,
+                folder: "My-Room",
+            });
+
             const { id } = req.params;
             const room = await Lodging.findByPk(id);
             if (!room) throw { name: "NotFound" };
