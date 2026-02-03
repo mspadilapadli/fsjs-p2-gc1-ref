@@ -142,6 +142,26 @@ class LodgingController {
             next(error);
         }
     }
-}
+    static async patchImgUrl(req, res, next) {
+        try {
+            const base64String = req.file.buffer.toString("base64");
 
+            const { id } = req.params;
+            const room = await Lodging.findByPk(id);
+            if (!room) throw { name: "NotFound" };
+            await Lodging.update(
+                { imgUrl: result.secure_url },
+                {
+                    where: { id },
+                },
+            );
+
+            res.status(200).json({
+                message: `Image ${room.name} has been updated `,
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+}
 module.exports = LodgingController;
