@@ -1,8 +1,8 @@
 //* async
 const { hash, compare } = require("bcryptjs");
-
+const salt = 10;
 module.exports = {
-    hashPassword: (password) => hash(password),
+    hashPassword: (password) => hash(password, salt),
     comparePassword: (passwordInput, passwordDB) =>
         compare(passwordInput, passwordDB),
 };
