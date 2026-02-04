@@ -1,44 +1,22 @@
-function errorHandler(error, req, res, next) {
-    let status = error.status;
-    let message = error.message;
-    switch (error.name) {
-        case "InvalidInput":
-            status = 400;
-            message = `Email or Password is required`;
-            break;
-        case "InvalidUser":
-            status = 401;
-            message = `Invalid email or password`;
-            break;
-        case "NotFound":
-            status = 404;
-            message = `Data not found`;
-            break;
-        case "Forbidden":
-            status = 403;
-            message = `You're not Unauthorized`;
-            break;
-        case "InvalidToken":
-            status = 401;
-            message = `Unauthenticated`;
-            break;
-        case "SequelizeValidationError":
-            status = 400;
-            message = error.errors.map((e) => e.message);
-            break;
-        case "SequelizeUniqueConstraintError":
-            status = 400;
-            message = error.errors.map((e) => e.message);
-            break;
+const formateSequelizeValidationError = require("../helper/formatError");
 
-        default:
-            status = 500;
-            message = `Internal Server Error`;
-            break;
+const errorHandler = (error, req, res, next) => {
+    let code = error.name || "INTERNAL_SERVER_ERROR";
+    let message = error.message || "Internal Server Error";
+    let status = error.status || 500;
+
+    if (error.name === "SequelizeValidationError") {
+        code = "BAD_REQUEST";
+        message = formateSequelizeValidationError(error);
+        status = 400;
     }
-    res.status(status).json({
-        message,
-    });
-}
+    if (error.name === "SequelizeUniqueConstraintError") {
+        code = "BAD_REQUEST";
+        message = error.errors.map((err) => err.message);
+        status = 400;
+    }
+
+    res.status(status).json({ code, message });
+};
 
 module.exports = errorHandler;
