@@ -71,6 +71,10 @@ module.exports = (sequelize, DataTypes) => {
             },
         },
     );
-
+    // *hooks after user init
+    // User.beforeCreate(async (user, options) => {
+    //     const hashedPassword = await hashPassword(user.password);
+    //     user.password = hashedPassword;
+    // });
     return User;
 };
