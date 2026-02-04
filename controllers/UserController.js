@@ -1,39 +1,34 @@
-const { comparePassword } = require("../helpers/bcrypt");
-const { createToken } = require("../helpers/jwt");
+const AppError = require("../errors/AppError");
 const { User } = require("../models");
-
 class UserController {
     static async register(req, res, next) {
         try {
-            // console.log(req.body);
-            let user = await User.create(req.body);
-            // console.log(user);
+            const { username, email, password, phoneNumber, address } =
+                req.body;
 
-            res.status(201).json(user);
-            // res.status(201).json({ message: ` has been created` });
+            await User.create({
+                username,
+                email,
+                password,
+                phoneNumber,
+                address,
+            });
+            res.status(201).json({ message: "User registered successfully" });
         } catch (error) {
             next(error);
         }
     }
-
     static async login(req, res, next) {
         try {
-            let { email, password } = req.body;
-            if (!email || !password) throw { name: `InvalidInput` };
-
-            const user = await User.findOne({
-                where: { email },
-            });
-            if (!user) throw { name: `InvalidUser` };
-            const comparePass = comparePassword(password, user.password);
-            if (!comparePass) throw { name: `InvalidUser` };
-
-            let token = createToken({ id: user.id });
-
-            res.status(200).json({
-                access_token: token,
-            });
+            const { email, password } = req.body;
+            if (!email || !password)
+                throw new AppError(
+                    "InvalidInput",
+                    "Email and password are required",
+                    400,
+                );
         } catch (error) {
+            console.log(error);
             next(error);
         }
     }
