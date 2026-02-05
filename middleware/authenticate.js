@@ -12,6 +12,10 @@ const authentication = async (req, res, next) => {
             throw new AppError("INVALID_TOKEN", "Unauthenticated", 401);
 
         // *destruct (bearer , token ) yang di split dari token headers dan handle bearernya sama atau tidak
+        let [bearer, token] = getToken.split(" ");
+        if (bearer !== `Bearer`)
+            throw new AppError("INVALID_TOKEN", "Unauthenticated", 401);
+        // console.log(bearer, "<<<<bearer");
 
         // *ambil data/payload dengan verify tokennya
 
