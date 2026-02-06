@@ -18,4 +18,15 @@ const authorization = async (req, res, next) => {
     }
 };
 
+const adminAuthorize = async (req, res, next) => {
+    try {
+        // console.log(req.user.role, "roleadmnin");
+        if (req.user.role === `admin`) {
+            next();
+        } else throw { name: `Forbidden` };
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = { authorization, adminAuthorize };
