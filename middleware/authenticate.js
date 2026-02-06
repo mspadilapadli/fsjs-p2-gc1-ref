@@ -24,6 +24,7 @@ const authentication = async (req, res, next) => {
         if (!user) throw { name: `InvalidToken` };
 
         // * tambahkan properti user pada req, dgn atribut id dan role nya
+        req.user = { id: user.id, role: user.role };
 
         next();
     } catch (error) {
