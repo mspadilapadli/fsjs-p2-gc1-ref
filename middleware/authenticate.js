@@ -22,7 +22,7 @@ const authentication = async (req, res, next) => {
 
         // * find user byId dan handle jika null
         let user = await User.findByPk(payload.id);
-        if (!user) throw { name: `InvalidToken` };
+        if (!user) throw new AppError("INVALID_TOKEN", "Unauthenticated", 401);
 
         // * tambahkan properti user pada req, dgn atribut id dan role nya
         req.user = { id: user.id, role: user.role };
