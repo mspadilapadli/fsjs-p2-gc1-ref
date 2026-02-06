@@ -18,8 +18,10 @@ const authentication = async (req, res, next) => {
         // console.log(bearer, "<<<<bearer");
 
         // *ambil data/payload dengan verify tokennya
+        let payload = verifyToken(token);
 
         // * find user byId dan handle jika null
+        if (!user) throw { name: `InvalidToken` };
 
         // * tambahkan properti user pada req, dgn atribut id dan role nya
 
