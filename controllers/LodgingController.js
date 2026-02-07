@@ -115,7 +115,7 @@ class LodgingController {
         try {
             const { id } = req.params;
             const room = await Lodging.findByPk(id);
-            if (!room) throw { name: "NotFound" };
+            if (!room) throw new AppError("NOT_FOUND", "Data not found", 404);
 
             res.status(200).json(room);
         } catch (error) {
