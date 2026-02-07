@@ -16,8 +16,7 @@ class TypeController {
             const types = await Type.findAll();
             res.status(200).json(types);
         } catch (error) {
-            console.log(error);
-            res.status(500).json({ message: "Internal Server Error" });
+            next(error);
         }
     }
 
