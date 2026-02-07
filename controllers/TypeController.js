@@ -44,7 +44,7 @@ class TypeController {
         try {
             const { id } = req.params;
             const type = await Type.findByPk(id);
-            if (!type) throw { name: "NotFound" };
+            if (!type) throw new AppError("NOT_FOUND", "Data not found", 404);
             await Type.destroy({
                 where: { id },
             });
