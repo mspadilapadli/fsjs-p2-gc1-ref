@@ -26,7 +26,6 @@ class LodgingController {
                 rooms,
             });
         } catch (error) {
-            console.log(error);
             next(error);
         }
     }
