@@ -15,7 +15,7 @@ const authentication = async (req, res, next) => {
         let [bearer, token] = getToken.split(" ");
         if (bearer !== `Bearer`)
             throw new AppError("INVALID_TOKEN", "Unauthenticated", 401);
-        // console.log(bearer, "<<<<bearer");
+        `      // console.log(bearer, "<<<<bearer");`;
 
         // *ambil data/payload dengan verify tokennya
         let payload = verifyToken(token);
@@ -30,10 +30,6 @@ const authentication = async (req, res, next) => {
         next();
     } catch (error) {
         next(error);
-        //     if (error.name === `InvalidToken`) {
-        //         return res.status(401).json({ message: `Unauthenticated` });
-        //     }
-        //     res.status(500).json({ message: `Internal Server Error` });
     }
 };
 module.exports = authentication;
